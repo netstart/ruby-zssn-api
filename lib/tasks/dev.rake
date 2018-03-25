@@ -2,7 +2,30 @@ namespace :dev do
   desc "Popula dados para teste"
   task setup: :environment do
 
-    puts "Cadastrando survivor"
+    puts "Cadastrando Recursos..."
+    Resource.create!(
+        name: "Water",
+        point: 4,
+        )
+
+    Resource.create!(
+        name: "Food",
+        point: 3,
+        )
+
+    Resource.create!(
+        name: "Medication",
+        point: 2,
+        )
+
+    Resource.create!(
+        name: "Ammunition",
+        point: 1,
+        )
+
+    puts "Recursos cadastrados"
+
+    puts "Cadastrando survivor..."
     100.times do |i|
       Survivor.create!(
           name: Faker::Name.name,
@@ -15,7 +38,7 @@ namespace :dev do
           )
       )
     end
-    puts "Survivor cadastrado com sucesso!"
+    puts "Survivor cadastrado"
 
   end
 
