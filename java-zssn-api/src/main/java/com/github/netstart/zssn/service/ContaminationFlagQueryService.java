@@ -81,6 +81,9 @@ public class ContaminationFlagQueryService extends QueryService<ContaminationFla
             if (criteria.getReportedById() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getReportedById(), ContaminationFlag_.reportedBy, Survivor_.id));
             }
+            if (criteria.getReportedId() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getReportedId(), ContaminationFlag_.reported, Survivor_.id));
+            }
         }
         return specification;
     }

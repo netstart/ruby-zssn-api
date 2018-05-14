@@ -12,9 +12,11 @@ import org.mapstruct.*;
 public interface ContaminationFlagMapper extends EntityMapper<ContaminationFlagDTO, ContaminationFlag> {
 
     @Mapping(source = "reportedBy.id", target = "reportedById")
+    @Mapping(source = "reported.id", target = "reportedId")
     ContaminationFlagDTO toDto(ContaminationFlag contaminationFlag);
 
     @Mapping(source = "reportedById", target = "reportedBy")
+    @Mapping(source = "reportedId", target = "reported")
     ContaminationFlag toEntity(ContaminationFlagDTO contaminationFlagDTO);
 
     default ContaminationFlag fromId(Long id) {

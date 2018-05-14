@@ -24,6 +24,10 @@ public class ContaminationFlag implements Serializable {
     @NotNull
     private Survivor reportedBy;
 
+    @ManyToOne(optional = false)
+    @NotNull
+    private Survivor reported;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -44,6 +48,19 @@ public class ContaminationFlag implements Serializable {
 
     public void setReportedBy(Survivor survivor) {
         this.reportedBy = survivor;
+    }
+
+    public Survivor getReported() {
+        return reported;
+    }
+
+    public ContaminationFlag reported(Survivor survivor) {
+        this.reported = survivor;
+        return this;
+    }
+
+    public void setReported(Survivor survivor) {
+        this.reported = survivor;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

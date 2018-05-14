@@ -9,6 +9,15 @@
                 "required"
             ],
             "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "reported",
+            "otherEntityName": "survivor",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "id"
         }
     ],
     "fields": [],

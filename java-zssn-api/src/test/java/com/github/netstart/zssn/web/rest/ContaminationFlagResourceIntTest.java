@@ -4,6 +4,7 @@ import com.github.netstart.zssn.ZssnApp;
 
 import com.github.netstart.zssn.domain.ContaminationFlag;
 import com.github.netstart.zssn.domain.Survivor;
+import com.github.netstart.zssn.domain.Survivor;
 import com.github.netstart.zssn.repository.ContaminationFlagRepository;
 import com.github.netstart.zssn.service.ContaminationFlagService;
 import com.github.netstart.zssn.service.dto.ContaminationFlagDTO;
@@ -96,6 +97,11 @@ public class ContaminationFlagResourceIntTest {
         em.persist(reportedBy);
         em.flush();
         contaminationFlag.setReportedBy(reportedBy);
+        // Add required entity
+        Survivor reported = SurvivorResourceIntTest.createEntity(em);
+        em.persist(reported);
+        em.flush();
+        contaminationFlag.setReported(reported);
         return contaminationFlag;
     }
 
@@ -184,6 +190,25 @@ public class ContaminationFlagResourceIntTest {
 
         // Get all the contaminationFlagList where reportedBy equals to reportedById + 1
         defaultContaminationFlagShouldNotBeFound("reportedById.equals=" + (reportedById + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllContaminationFlagsByReportedIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Survivor reported = SurvivorResourceIntTest.createEntity(em);
+        em.persist(reported);
+        em.flush();
+        contaminationFlag.setReported(reported);
+        contaminationFlagRepository.saveAndFlush(contaminationFlag);
+        Long reportedId = reported.getId();
+
+        // Get all the contaminationFlagList where reported equals to reportedId
+        defaultContaminationFlagShouldBeFound("reportedId.equals=" + reportedId);
+
+        // Get all the contaminationFlagList where reported equals to reportedId + 1
+        defaultContaminationFlagShouldNotBeFound("reportedId.equals=" + (reportedId + 1));
     }
 
     /**

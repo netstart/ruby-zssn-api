@@ -14,5 +14,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="survivor"/>
 
+        <addForeignKeyConstraint baseColumnNames="reported_id"
+                                 baseTableName="contamination_flag"
+                                 constraintName="fk_contamination_flag_reported_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="survivor"/>
+
     </changeSet>
 </databaseChangeLog>

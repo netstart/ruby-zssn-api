@@ -30,6 +30,8 @@ public class ContaminationFlagCriteria implements Serializable {
 
     private LongFilter reportedById;
 
+    private LongFilter reportedId;
+
     public ContaminationFlagCriteria() {
     }
 
@@ -49,11 +51,20 @@ public class ContaminationFlagCriteria implements Serializable {
         this.reportedById = reportedById;
     }
 
+    public LongFilter getReportedId() {
+        return reportedId;
+    }
+
+    public void setReportedId(LongFilter reportedId) {
+        this.reportedId = reportedId;
+    }
+
     @Override
     public String toString() {
         return "ContaminationFlagCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
                 (reportedById != null ? "reportedById=" + reportedById + ", " : "") +
+                (reportedId != null ? "reportedId=" + reportedId + ", " : "") +
             "}";
     }
 

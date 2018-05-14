@@ -16,6 +16,8 @@ public class ContaminationFlagDTO implements Serializable {
 
     private Long reportedById;
 
+    private Long reportedId;
+
     public Long getId() {
         return id;
     }
@@ -30,6 +32,14 @@ public class ContaminationFlagDTO implements Serializable {
 
     public void setReportedById(Long survivorId) {
         this.reportedById = survivorId;
+    }
+
+    public Long getReportedId() {
+        return reportedId;
+    }
+
+    public void setReportedId(Long survivorId) {
+        this.reportedId = survivorId;
     }
 
     @Override
