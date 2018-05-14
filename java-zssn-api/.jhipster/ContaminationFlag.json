@@ -1,0 +1,23 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "reportedBy",
+            "otherEntityName": "survivor",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [],
+    "changelogDate": "20180514170100",
+    "dto": "mapstruct",
+    "service": "serviceClass",
+    "entityTableName": "contamination_flag",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination",
+    "microserviceName": "zssn",
+    "searchEngine": false
+}

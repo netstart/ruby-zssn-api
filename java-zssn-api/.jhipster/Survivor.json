@@ -1,0 +1,51 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "lastLocation",
+            "otherEntityName": "location",
+            "relationshipType": "one-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "survivor"
+        },
+        {
+            "relationshipName": "inventory",
+            "otherEntityName": "inventory",
+            "relationshipType": "one-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "survivor"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "age",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20180514165532",
+    "dto": "mapstruct",
+    "service": "serviceClass",
+    "entityTableName": "survivor",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination",
+    "microserviceName": "zssn",
+    "searchEngine": false
+}
