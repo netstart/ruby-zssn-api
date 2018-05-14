@@ -29,6 +29,10 @@ public class Item implements Serializable {
     @Column(name = "point", nullable = false)
     private Long point;
 
+    @ManyToOne(optional = false)
+    @NotNull
+    private Inventory inventory;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -62,6 +66,19 @@ public class Item implements Serializable {
 
     public void setPoint(Long point) {
         this.point = point;
+    }
+
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public Item inventory(Inventory inventory) {
+        this.inventory = inventory;
+        return this;
+    }
+
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

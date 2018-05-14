@@ -84,6 +84,9 @@ public class ItemQueryService extends QueryService<Item> {
             if (criteria.getPoint() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getPoint(), Item_.point));
             }
+            if (criteria.getInventoryId() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getInventoryId(), Item_.inventory, Inventory_.id));
+            }
         }
         return specification;
     }

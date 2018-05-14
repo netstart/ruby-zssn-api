@@ -1,6 +1,16 @@
 {
     "fluentMethods": true,
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipName": "inventory",
+            "otherEntityName": "inventory",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "id"
+        }
+    ],
     "fields": [
         {
             "fieldName": "name",

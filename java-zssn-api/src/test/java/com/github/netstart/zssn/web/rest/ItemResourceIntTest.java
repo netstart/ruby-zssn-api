@@ -3,6 +3,7 @@ package com.github.netstart.zssn.web.rest;
 import com.github.netstart.zssn.ZssnApp;
 
 import com.github.netstart.zssn.domain.Item;
+import com.github.netstart.zssn.domain.Inventory;
 import com.github.netstart.zssn.repository.ItemRepository;
 import com.github.netstart.zssn.service.ItemService;
 import com.github.netstart.zssn.service.dto.ItemDTO;
@@ -98,6 +99,11 @@ public class ItemResourceIntTest {
         Item item = new Item()
             .name(DEFAULT_NAME)
             .point(DEFAULT_POINT);
+        // Add required entity
+        Inventory inventory = InventoryResourceIntTest.createEntity(em);
+        em.persist(inventory);
+        em.flush();
+        item.setInventory(inventory);
         return item;
     }
 
@@ -316,6 +322,25 @@ public class ItemResourceIntTest {
 
         // Get all the itemList where point less than or equals to UPDATED_POINT
         defaultItemShouldBeFound("point.lessThan=" + UPDATED_POINT);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllItemsByInventoryIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Inventory inventory = InventoryResourceIntTest.createEntity(em);
+        em.persist(inventory);
+        em.flush();
+        item.setInventory(inventory);
+        itemRepository.saveAndFlush(item);
+        Long inventoryId = inventory.getId();
+
+        // Get all the itemList where inventory equals to inventoryId
+        defaultItemShouldBeFound("inventoryId.equals=" + inventoryId);
+
+        // Get all the itemList where inventory equals to inventoryId + 1
+        defaultItemShouldNotBeFound("inventoryId.equals=" + (inventoryId + 1));
     }
 
     /**

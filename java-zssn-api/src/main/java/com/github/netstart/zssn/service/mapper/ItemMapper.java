@@ -8,10 +8,14 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity Item and its DTO ItemDTO.
  */
-@Mapper(componentModel = "spring", uses = {})
+@Mapper(componentModel = "spring", uses = {InventoryMapper.class})
 public interface ItemMapper extends EntityMapper<ItemDTO, Item> {
 
+    @Mapping(source = "inventory.id", target = "inventoryId")
+    ItemDTO toDto(Item item);
 
+    @Mapping(source = "inventoryId", target = "inventory")
+    Item toEntity(ItemDTO itemDTO);
 
     default Item fromId(Long id) {
         if (id == null) {

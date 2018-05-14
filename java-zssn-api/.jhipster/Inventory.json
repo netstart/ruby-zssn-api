@@ -1,0 +1,20 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "itens",
+            "otherEntityName": "item",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "inventory"
+        }
+    ],
+    "fields": [],
+    "changelogDate": "20180514164506",
+    "dto": "mapstruct",
+    "service": "serviceClass",
+    "entityTableName": "inventory",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination",
+    "microserviceName": "zssn",
+    "searchEngine": false
+}

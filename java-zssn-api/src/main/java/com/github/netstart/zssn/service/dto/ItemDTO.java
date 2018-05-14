@@ -3,6 +3,8 @@ package com.github.netstart.zssn.service.dto;
 
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -18,6 +20,8 @@ public class ItemDTO implements Serializable {
     @NotNull
     @Min(value = 1L)
     private Long point;
+
+    private Long inventoryId;
 
     public Long getId() {
         return id;
@@ -41,6 +45,14 @@ public class ItemDTO implements Serializable {
 
     public void setPoint(Long point) {
         this.point = point;
+    }
+
+    public Long getInventoryId() {
+        return inventoryId;
+    }
+
+    public void setInventoryId(Long inventoryId) {
+        this.inventoryId = inventoryId;
     }
 
     @Override
