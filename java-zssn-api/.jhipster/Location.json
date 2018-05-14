@@ -1,0 +1,28 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "longitude",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "latitude",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20180514161542",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "location",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no",
+    "microserviceName": "zssn",
+    "searchEngine": false
+}
