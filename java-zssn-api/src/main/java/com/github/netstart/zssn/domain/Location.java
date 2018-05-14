@@ -1,6 +1,5 @@
 package com.github.netstart.zssn.domain;
 
-
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
@@ -14,82 +13,94 @@ import java.util.Objects;
 @Table(name = "location")
 public class Location implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @NotNull
-    @Column(name = "longitude", nullable = false)
-    private String longitude;
+	@NotNull
+	@Column(name = "longitude", nullable = false)
+	private String longitude;
 
-    @NotNull
-    @Column(name = "latitude", nullable = false)
-    private String latitude;
+	@NotNull
+	@Column(name = "latitude", nullable = false)
+	private String latitude;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
-    public Long getId() {
-        return id;
-    }
+	/**
+	 * Only to frameworks
+	 */
+	@Deprecated
+	public Location() {
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Location(String longitude, String latitude) {
+		super();
+		this.longitude = longitude;
+		this.latitude = latitude;
+	}
 
-    public String getLongitude() {
-        return longitude;
-    }
+	// jhipster-needle-entity-add-field - JHipster will add fields here, do not
+	// remove
+	public Long getId() {
+		return id;
+	}
 
-    public Location longitude(String longitude) {
-        this.longitude = longitude;
-        return this;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setLongitude(String longitude) {
-        this.longitude = longitude;
-    }
+	public String getLongitude() {
+		return longitude;
+	}
 
-    public String getLatitude() {
-        return latitude;
-    }
+	public Location longitude(String longitude) {
+		this.longitude = longitude;
+		return this;
+	}
 
-    public Location latitude(String latitude) {
-        this.latitude = latitude;
-        return this;
-    }
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
 
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
-    }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+	public String getLatitude() {
+		return latitude;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Location location = (Location) o;
-        if (location.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), location.getId());
-    }
+	public Location latitude(String latitude) {
+		this.latitude = latitude;
+		return this;
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(getId());
-    }
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+	// jhipster-needle-entity-add-getters-setters - JHipster will add getters and
+	// setters here, do not remove
 
-    @Override
-    public String toString() {
-        return "Location{" +
-            "id=" + getId() +
-            ", longitude='" + getLongitude() + "'" +
-            ", latitude='" + getLatitude() + "'" +
-            "}";
-    }
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		Location location = (Location) o;
+		if (location.getId() == null || getId() == null) {
+			return false;
+		}
+		return Objects.equals(getId(), location.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hashCode(getId());
+	}
+
+	@Override
+	public String toString() {
+		return "Location{" + "id=" + getId() + ", longitude='" + getLongitude() + "'" + ", latitude='" + getLatitude()
+				+ "'" + "}";
+	}
 }

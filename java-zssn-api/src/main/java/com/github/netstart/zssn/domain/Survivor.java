@@ -17,147 +17,160 @@ import java.util.Objects;
 @Table(name = "survivor")
 public class Survivor implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @NotNull
-    @Column(name = "name", nullable = false)
-    private String name;
+	@NotNull
+	@Column(name = "name", nullable = false)
+	private String name;
 
-    @NotNull
-    @Column(name = "age", nullable = false)
-    private Integer age;
+	@NotNull
+	@Column(name = "age", nullable = false)
+	private Integer age;
 
-    @OneToOne(optional = false)
-    @NotNull
-    @JoinColumn(unique = true)
-    private Location lastLocation;
+	@OneToOne(optional = false)
+	@NotNull
+	@JoinColumn(unique = true)
+	private Location lastLocation;
 
-    @OneToOne(optional = false)
-    @NotNull
-    @JoinColumn(unique = true)
-    private Inventory inventory;
+	@OneToOne(optional = false)
+	@NotNull
+	@JoinColumn(unique = true)
+	private Inventory inventory;
 
-    @OneToMany(mappedBy = "reported")
-    @JsonIgnore
-    private Set<ContaminationFlag> reporteds = new HashSet<>();
+	@OneToMany(mappedBy = "reported")
+	@JsonIgnore
+	private Set<ContaminationFlag> reporteds = new HashSet<>();
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
-    public Long getId() {
-        return id;
-    }
+	/**
+	 * Only to frameworks
+	 */
+	@Deprecated
+	public Survivor() {
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Survivor(String name, Integer age, Location lastLocation, Inventory inventory) {
+		super();
+		this.name = name;
+		this.age = age;
+		this.lastLocation = lastLocation;
+		this.inventory = inventory;
+	}
 
-    public String getName() {
-        return name;
-    }
+	// jhipster-needle-entity-add-field - JHipster will add fields here, do not
+	// remove
+	public Long getId() {
+		return id;
+	}
 
-    public Survivor name(String name) {
-        this.name = name;
-        return this;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public Integer getAge() {
-        return age;
-    }
+	public Survivor name(String name) {
+		this.name = name;
+		return this;
+	}
 
-    public Survivor age(Integer age) {
-        this.age = age;
-        return this;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setAge(Integer age) {
-        this.age = age;
-    }
+	public Integer getAge() {
+		return age;
+	}
 
-    public Location getLastLocation() {
-        return lastLocation;
-    }
+	public Survivor age(Integer age) {
+		this.age = age;
+		return this;
+	}
 
-    public Survivor lastLocation(Location location) {
-        this.lastLocation = location;
-        return this;
-    }
+	public void setAge(Integer age) {
+		this.age = age;
+	}
 
-    public void setLastLocation(Location location) {
-        this.lastLocation = location;
-    }
+	public Location getLastLocation() {
+		return lastLocation;
+	}
 
-    public Inventory getInventory() {
-        return inventory;
-    }
+	public Survivor lastLocation(Location location) {
+		this.lastLocation = location;
+		return this;
+	}
 
-    public Survivor inventory(Inventory inventory) {
-        this.inventory = inventory;
-        return this;
-    }
+	public void setLastLocation(Location location) {
+		this.lastLocation = location;
+	}
 
-    public void setInventory(Inventory inventory) {
-        this.inventory = inventory;
-    }
+	public Inventory getInventory() {
+		return inventory;
+	}
 
-    public Set<ContaminationFlag> getReporteds() {
-        return reporteds;
-    }
+	public Survivor inventory(Inventory inventory) {
+		this.inventory = inventory;
+		return this;
+	}
 
-    public Survivor reporteds(Set<ContaminationFlag> contaminationFlags) {
-        this.reporteds = contaminationFlags;
-        return this;
-    }
+	public void setInventory(Inventory inventory) {
+		this.inventory = inventory;
+	}
 
-    public Survivor addReported(ContaminationFlag contaminationFlag) {
-        this.reporteds.add(contaminationFlag);
-        contaminationFlag.setReported(this);
-        return this;
-    }
+	public Set<ContaminationFlag> getReporteds() {
+		return reporteds;
+	}
 
-    public Survivor removeReported(ContaminationFlag contaminationFlag) {
-        this.reporteds.remove(contaminationFlag);
-        contaminationFlag.setReported(null);
-        return this;
-    }
+	public Survivor reporteds(Set<ContaminationFlag> contaminationFlags) {
+		this.reporteds = contaminationFlags;
+		return this;
+	}
 
-    public void setReporteds(Set<ContaminationFlag> contaminationFlags) {
-        this.reporteds = contaminationFlags;
-    }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+	public Survivor addReported(ContaminationFlag contaminationFlag) {
+		this.reporteds.add(contaminationFlag);
+		contaminationFlag.setReported(this);
+		return this;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Survivor survivor = (Survivor) o;
-        if (survivor.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), survivor.getId());
-    }
+	public Survivor removeReported(ContaminationFlag contaminationFlag) {
+		this.reporteds.remove(contaminationFlag);
+		contaminationFlag.setReported(null);
+		return this;
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(getId());
-    }
+	public void setReporteds(Set<ContaminationFlag> contaminationFlags) {
+		this.reporteds = contaminationFlags;
+	}
+	// jhipster-needle-entity-add-getters-setters - JHipster will add getters and
+	// setters here, do not remove
 
-    @Override
-    public String toString() {
-        return "Survivor{" +
-            "id=" + getId() +
-            ", name='" + getName() + "'" +
-            ", age=" + getAge() +
-            "}";
-    }
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		Survivor survivor = (Survivor) o;
+		if (survivor.getId() == null || getId() == null) {
+			return false;
+		}
+		return Objects.equals(getId(), survivor.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hashCode(getId());
+	}
+
+	@Override
+	public String toString() {
+		return "Survivor{" + "id=" + getId() + ", name='" + getName() + "'" + ", age=" + getAge() + "}";
+	}
 }
