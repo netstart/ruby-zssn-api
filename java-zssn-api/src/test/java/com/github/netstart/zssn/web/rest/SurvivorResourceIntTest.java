@@ -5,6 +5,7 @@ import com.github.netstart.zssn.ZssnApp;
 import com.github.netstart.zssn.domain.Survivor;
 import com.github.netstart.zssn.domain.Location;
 import com.github.netstart.zssn.domain.Inventory;
+import com.github.netstart.zssn.domain.ContaminationFlag;
 import com.github.netstart.zssn.repository.SurvivorRepository;
 import com.github.netstart.zssn.service.SurvivorService;
 import com.github.netstart.zssn.service.dto.SurvivorDTO;
@@ -366,6 +367,25 @@ public class SurvivorResourceIntTest {
 
         // Get all the survivorList where inventory equals to inventoryId + 1
         defaultSurvivorShouldNotBeFound("inventoryId.equals=" + (inventoryId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllSurvivorsByReportedIsEqualToSomething() throws Exception {
+        // Initialize the database
+        ContaminationFlag reported = ContaminationFlagResourceIntTest.createEntity(em);
+        em.persist(reported);
+        em.flush();
+        survivor.addReported(reported);
+        survivorRepository.saveAndFlush(survivor);
+        Long reportedId = reported.getId();
+
+        // Get all the survivorList where reported equals to reportedId
+        defaultSurvivorShouldBeFound("reportedId.equals=" + reportedId);
+
+        // Get all the survivorList where reported equals to reportedId + 1
+        defaultSurvivorShouldNotBeFound("reportedId.equals=" + (reportedId + 1));
     }
 
     /**

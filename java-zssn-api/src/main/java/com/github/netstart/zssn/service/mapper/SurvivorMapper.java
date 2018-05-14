@@ -17,6 +17,7 @@ public interface SurvivorMapper extends EntityMapper<SurvivorDTO, Survivor> {
 
     @Mapping(source = "lastLocationId", target = "lastLocation")
     @Mapping(source = "inventoryId", target = "inventory")
+    @Mapping(target = "reporteds", ignore = true)
     Survivor toEntity(SurvivorDTO survivorDTO);
 
     default Survivor fromId(Long id) {

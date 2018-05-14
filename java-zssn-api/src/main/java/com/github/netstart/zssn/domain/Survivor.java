@@ -1,10 +1,13 @@
 package com.github.netstart.zssn.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -37,6 +40,10 @@ public class Survivor implements Serializable {
     @NotNull
     @JoinColumn(unique = true)
     private Inventory inventory;
+
+    @OneToMany(mappedBy = "reported")
+    @JsonIgnore
+    private Set<ContaminationFlag> reporteds = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -97,6 +104,31 @@ public class Survivor implements Serializable {
 
     public void setInventory(Inventory inventory) {
         this.inventory = inventory;
+    }
+
+    public Set<ContaminationFlag> getReporteds() {
+        return reporteds;
+    }
+
+    public Survivor reporteds(Set<ContaminationFlag> contaminationFlags) {
+        this.reporteds = contaminationFlags;
+        return this;
+    }
+
+    public Survivor addReported(ContaminationFlag contaminationFlag) {
+        this.reporteds.add(contaminationFlag);
+        contaminationFlag.setReported(this);
+        return this;
+    }
+
+    public Survivor removeReported(ContaminationFlag contaminationFlag) {
+        this.reporteds.remove(contaminationFlag);
+        contaminationFlag.setReported(null);
+        return this;
+    }
+
+    public void setReporteds(Set<ContaminationFlag> contaminationFlags) {
+        this.reporteds = contaminationFlags;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

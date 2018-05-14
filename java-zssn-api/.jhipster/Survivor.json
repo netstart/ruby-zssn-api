@@ -22,6 +22,12 @@
             "otherEntityField": "id",
             "ownerSide": true,
             "otherEntityRelationshipName": "survivor"
+        },
+        {
+            "relationshipName": "reported",
+            "otherEntityName": "contaminationFlag",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "reported"
         }
     ],
     "fields": [

@@ -36,6 +36,8 @@ public class SurvivorCriteria implements Serializable {
 
     private LongFilter inventoryId;
 
+    private LongFilter reportedId;
+
     public SurvivorCriteria() {
     }
 
@@ -79,6 +81,14 @@ public class SurvivorCriteria implements Serializable {
         this.inventoryId = inventoryId;
     }
 
+    public LongFilter getReportedId() {
+        return reportedId;
+    }
+
+    public void setReportedId(LongFilter reportedId) {
+        this.reportedId = reportedId;
+    }
+
     @Override
     public String toString() {
         return "SurvivorCriteria{" +
@@ -87,6 +97,7 @@ public class SurvivorCriteria implements Serializable {
                 (age != null ? "age=" + age + ", " : "") +
                 (lastLocationId != null ? "lastLocationId=" + lastLocationId + ", " : "") +
                 (inventoryId != null ? "inventoryId=" + inventoryId + ", " : "") +
+                (reportedId != null ? "reportedId=" + reportedId + ", " : "") +
             "}";
     }
 

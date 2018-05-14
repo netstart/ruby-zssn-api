@@ -2,12 +2,15 @@ package com.github.netstart.zssn.service;
 
 import com.github.netstart.zssn.domain.Location;
 import com.github.netstart.zssn.repository.LocationRepository;
+import com.github.netstart.zssn.service.dto.LocationDTO;
+import com.github.netstart.zssn.service.mapper.LocationMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 
 /**
  * Service Implementation for managing Location.
@@ -20,30 +23,37 @@ public class LocationService {
 
     private final LocationRepository locationRepository;
 
-    public LocationService(LocationRepository locationRepository) {
+    private final LocationMapper locationMapper;
+
+    public LocationService(LocationRepository locationRepository, LocationMapper locationMapper) {
         this.locationRepository = locationRepository;
+        this.locationMapper = locationMapper;
     }
 
     /**
      * Save a location.
      *
-     * @param location the entity to save
+     * @param locationDTO the entity to save
      * @return the persisted entity
      */
-    public Location save(Location location) {
-        log.debug("Request to save Location : {}", location);
-        return locationRepository.save(location);
+    public LocationDTO save(LocationDTO locationDTO) {
+        log.debug("Request to save Location : {}", locationDTO);
+        Location location = locationMapper.toEntity(locationDTO);
+        location = locationRepository.save(location);
+        return locationMapper.toDto(location);
     }
 
     /**
      * Get all the locations.
      *
+     * @param pageable the pagination information
      * @return the list of entities
      */
     @Transactional(readOnly = true)
-    public List<Location> findAll() {
+    public Page<LocationDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Locations");
-        return locationRepository.findAll();
+        return locationRepository.findAll(pageable)
+            .map(locationMapper::toDto);
     }
 
     /**
@@ -53,9 +63,10 @@ public class LocationService {
      * @return the entity
      */
     @Transactional(readOnly = true)
-    public Location findOne(Long id) {
+    public LocationDTO findOne(Long id) {
         log.debug("Request to get Location : {}", id);
-        return locationRepository.findOne(id);
+        Location location = locationRepository.findOne(id);
+        return locationMapper.toDto(location);
     }
 
     /**

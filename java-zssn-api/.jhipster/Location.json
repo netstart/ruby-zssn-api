@@ -18,11 +18,11 @@
         }
     ],
     "changelogDate": "20180514161542",
-    "dto": "no",
+    "dto": "mapstruct",
     "service": "serviceClass",
     "entityTableName": "location",
-    "jpaMetamodelFiltering": false,
-    "pagination": "no",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination",
     "microserviceName": "zssn",
     "searchEngine": false
 }

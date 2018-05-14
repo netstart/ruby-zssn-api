@@ -90,6 +90,9 @@ public class SurvivorQueryService extends QueryService<Survivor> {
             if (criteria.getInventoryId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getInventoryId(), Survivor_.inventory, Inventory_.id));
             }
+            if (criteria.getReportedId() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getReportedId(), Survivor_.reporteds, ContaminationFlag_.id));
+            }
         }
         return specification;
     }
