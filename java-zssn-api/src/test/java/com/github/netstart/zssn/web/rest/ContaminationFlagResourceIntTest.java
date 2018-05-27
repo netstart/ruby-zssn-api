@@ -4,7 +4,6 @@ import com.github.netstart.zssn.ZssnApp;
 
 import com.github.netstart.zssn.domain.ContaminationFlag;
 import com.github.netstart.zssn.domain.Survivor;
-import com.github.netstart.zssn.domain.Survivor;
 import com.github.netstart.zssn.repository.ContaminationFlagRepository;
 import com.github.netstart.zssn.service.ContaminationFlagService;
 import com.github.netstart.zssn.service.dto.ContaminationFlagDTO;

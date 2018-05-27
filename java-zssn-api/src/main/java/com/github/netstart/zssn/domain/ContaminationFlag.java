@@ -1,6 +1,5 @@
 package com.github.netstart.zssn.domain;
 
-
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
@@ -14,80 +13,89 @@ import java.util.Objects;
 @Table(name = "contamination_flag")
 public class ContaminationFlag implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @ManyToOne(optional = false)
-    @NotNull
-    private Survivor reportedBy;
+	@ManyToOne(optional = false)
+	@NotNull
+	private Survivor reportedBy;
 
-    @ManyToOne(optional = false)
-    @NotNull
-    private Survivor reported;
+	@ManyToOne(optional = false)
+	@NotNull
+	private Survivor reported;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
-    public Long getId() {
-        return id;
-    }
+	@Deprecated
+	public ContaminationFlag() {
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public ContaminationFlag(Survivor reported, Survivor survivorReporter) {
+		this.reported = reported;
+		this.reportedBy = survivorReporter;
+	}
 
-    public Survivor getReportedBy() {
-        return reportedBy;
-    }
+	// jhipster-needle-entity-add-field - JHipster will add fields here, do not
+	// remove
+	public Long getId() {
+		return id;
+	}
 
-    public ContaminationFlag reportedBy(Survivor survivor) {
-        this.reportedBy = survivor;
-        return this;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setReportedBy(Survivor survivor) {
-        this.reportedBy = survivor;
-    }
+	public Survivor getReportedBy() {
+		return reportedBy;
+	}
 
-    public Survivor getReported() {
-        return reported;
-    }
+	public ContaminationFlag reportedBy(Survivor survivor) {
+		this.reportedBy = survivor;
+		return this;
+	}
 
-    public ContaminationFlag reported(Survivor survivor) {
-        this.reported = survivor;
-        return this;
-    }
+	public void setReportedBy(Survivor survivor) {
+		this.reportedBy = survivor;
+	}
 
-    public void setReported(Survivor survivor) {
-        this.reported = survivor;
-    }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+	public Survivor getReported() {
+		return reported;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        ContaminationFlag contaminationFlag = (ContaminationFlag) o;
-        if (contaminationFlag.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), contaminationFlag.getId());
-    }
+	public ContaminationFlag reported(Survivor survivor) {
+		this.reported = survivor;
+		return this;
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(getId());
-    }
+	public void setReported(Survivor survivor) {
+		this.reported = survivor;
+	}
+	// jhipster-needle-entity-add-getters-setters - JHipster will add getters and
+	// setters here, do not remove
 
-    @Override
-    public String toString() {
-        return "ContaminationFlag{" +
-            "id=" + getId() +
-            "}";
-    }
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		ContaminationFlag contaminationFlag = (ContaminationFlag) o;
+		if (contaminationFlag.getId() == null || getId() == null) {
+			return false;
+		}
+		return Objects.equals(getId(), contaminationFlag.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hashCode(getId());
+	}
+
+	@Override
+	public String toString() {
+		return "ContaminationFlag{" + "id=" + getId() + "}";
+	}
 }

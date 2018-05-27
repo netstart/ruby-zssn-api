@@ -1,14 +1,22 @@
 package com.github.netstart.zssn.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import javax.persistence.*;
-import javax.validation.constraints.*;
-
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
+import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * A Survivor.
@@ -123,6 +131,9 @@ public class Survivor implements Serializable {
 	}
 
 	public Set<ContaminationFlag> getReporteds() {
+		if (reporteds == null) {
+			this.setReporteds(new HashSet<>());
+		}
 		return reporteds;
 	}
 
@@ -133,6 +144,13 @@ public class Survivor implements Serializable {
 
 	public Survivor addReported(ContaminationFlag contaminationFlag) {
 		this.reporteds.add(contaminationFlag);
+
+		for (ContaminationFlag contamination : reporteds) {
+			if (contamination.getReportedBy().equals(contaminationFlag.getReportedBy())) {
+				return this;
+			}
+		}
+
 		contaminationFlag.setReported(this);
 		return this;
 	}
@@ -146,8 +164,19 @@ public class Survivor implements Serializable {
 	public void setReporteds(Set<ContaminationFlag> contaminationFlags) {
 		this.reporteds = contaminationFlags;
 	}
+
+	public void report(Survivor survivorReporter) {
+
+		ContaminationFlag contaminationFlag = new ContaminationFlag(this, survivorReporter);
+		this.addReported(contaminationFlag);
+	}
+
 	// jhipster-needle-entity-add-getters-setters - JHipster will add getters and
 	// setters here, do not remove
+
+	public Boolean isContamined() {
+		return getReporteds().size() > 2;
+	}
 
 	@Override
 	public boolean equals(Object o) {

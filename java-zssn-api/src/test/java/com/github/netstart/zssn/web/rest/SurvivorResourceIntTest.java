@@ -1,9 +1,8 @@
 package com.github.netstart.zssn.web.rest;
 
 import com.github.netstart.zssn.ZssnApp;
-
-import com.github.netstart.zssn.domain.Survivor;
 import com.github.netstart.zssn.domain.Location;
+import com.github.netstart.zssn.domain.Survivor;
 import com.github.netstart.zssn.domain.Inventory;
 import com.github.netstart.zssn.domain.ContaminationFlag;
 import com.github.netstart.zssn.repository.SurvivorRepository;

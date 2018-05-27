@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import io.github.jhipster.service.QueryService;
 
-import com.github.netstart.zssn.domain.Survivor;
 import com.github.netstart.zssn.domain.*; // for static metamodels
 import com.github.netstart.zssn.repository.SurvivorRepository;
 import com.github.netstart.zssn.service.dto.SurvivorCriteria;
