@@ -1,13 +1,19 @@
 package com.github.netstart.zssn.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import javax.persistence.*;
-
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * A Inventory.
@@ -66,7 +72,14 @@ public class Inventory implements Serializable {
 	}
 	// jhipster-needle-entity-add-getters-setters - JHipster will add getters and
 	// setters here, do not remove
-
+	
+	
+	public void trade(Inventory inventoryRight, List<Item> itensLeft, List<Item> itensRight) {
+		
+		
+	}
+	
+	
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {
