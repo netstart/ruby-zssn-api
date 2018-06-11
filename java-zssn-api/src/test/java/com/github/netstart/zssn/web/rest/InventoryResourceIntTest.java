@@ -12,6 +12,7 @@ import com.github.netstart.zssn.web.rest.errors.ExceptionTranslator;
 import com.github.netstart.zssn.service.dto.InventoryCriteria;
 import com.github.netstart.zssn.service.InventoryQueryService;
 
+import org.assertj.core.util.Sets;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -170,7 +171,7 @@ public class InventoryResourceIntTest {
         Item itens = ItemResourceIntTest.createEntity(em);
         em.persist(itens);
         em.flush();
-        inventory.addItens(itens);
+        inventory = new Inventory(Sets.newLinkedHashSet(itens));
         inventoryRepository.saveAndFlush(inventory);
         Long itensId = itens.getId();
 

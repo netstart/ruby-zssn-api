@@ -31,8 +31,12 @@ public class Inventory implements Serializable {
 	@JsonIgnore
 	private Set<Item> itens = new HashSet<>();
 
+	@Deprecated
 	public Inventory() {
+	}
 
+	public Inventory(Set<Item> itens) {
+		this.addItens(itens);
 	}
 
 	// jhipster-needle-entity-add-field - JHipster will add fields here, do not
@@ -49,30 +53,19 @@ public class Inventory implements Serializable {
 		return itens;
 	}
 
-	public Inventory itens(Set<Item> items) {
-		this.itens = items;
-		return this;
-	}
-
-	public Inventory addItens(Item item) {
+	private Inventory addItem(Item item) {
 		this.itens.add(item);
 		item.setInventory(this);
 		return this;
 	}
 
-	public Inventory addItens(Set<Item> itens) {
-		itens.forEach((Item item) -> this.addItens(item));
+	private Inventory addItens(Set<Item> itens) {
+		itens.forEach((Item item) -> this.addItem(item));
 		return this;
 	}
 
-	public Inventory removeItens(Set<Item> itens) {
+	private Inventory removeItens(Set<Item> itens) {
 		this.itens.removeAll(itens);
-		return this;
-	}
-
-	public Inventory removeItem(Item item) {
-		this.itens.remove(item);
-		item.setInventory(null);
 		return this;
 	}
 

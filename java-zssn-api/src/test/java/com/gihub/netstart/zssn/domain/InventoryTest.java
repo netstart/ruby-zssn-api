@@ -32,27 +32,22 @@ public class InventoryTest {
 	public void tradeTrue() {
 		Set<Item> leftItens = new HashSet<>();
 		leftItens.add(new Item(EPoint.FOOD.toString(), EPoint.FOOD.getPoint(), null));
-		Inventory leftInventory = new Inventory();
-		leftInventory.addItens(leftItens);
+		Inventory leftInventory = new Inventory(leftItens);
 
 		Boolean trade = Inventory.trade(leftInventory.getItens(), rightInventory.getItens());
-		
+
 		Assert.assertTrue(trade);
 		Assert.assertEquals(2, leftInventory.getItens().size());
 		Assert.assertEquals(1, rightInventory.getItens().size());
-		
+
 	}
 
 	private Inventory intializeLeftInventory() {
-		Inventory leftInventory = new Inventory();
-		leftInventory.addItens(initializeLeftItens());
-		return leftInventory;
+		return new Inventory(initializeLeftItens());
 	}
 
 	private Inventory intializeRightInventory() {
-		Inventory rightInventory = new Inventory();
-		rightInventory.addItens(initializeRightItens());
-		return rightInventory;
+		return new Inventory(initializeRightItens());
 	}
 
 	private Set<Item> initializeLeftItens() {
