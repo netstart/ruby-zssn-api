@@ -2,7 +2,6 @@ package com.github.netstart.zssn.domain;
 
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -61,7 +60,17 @@ public class Inventory implements Serializable {
 		return this;
 	}
 
-	public Inventory removeItens(Item item) {
+	public Inventory addItens(Set<Item> itens) {
+		itens.forEach((Item item) -> this.addItens(item));
+		return this;
+	}
+
+	public Inventory removeItens(Set<Item> itens) {
+		this.itens.removeAll(itens);
+		return this;
+	}
+
+	public Inventory removeItem(Item item) {
 		this.itens.remove(item);
 		item.setInventory(null);
 		return this;
@@ -72,14 +81,32 @@ public class Inventory implements Serializable {
 	}
 	// jhipster-needle-entity-add-getters-setters - JHipster will add getters and
 	// setters here, do not remove
-	
-	
-	public void trade(Inventory inventoryRight, List<Item> itensLeft, List<Item> itensRight) {
-		
-		
+
+	public static Boolean trade(Set<Item> leftItens, Set<Item> rightItems) {
+		if (!Item.isEqualPoints(leftItens, rightItems)) {
+			// Quantidade de pontos não é igual... talvez seja melhor lançar uma exception
+			return false;
+		}
+		Inventory leftInventory = getInventory(leftItens);
+		Inventory rightInventory = getInventory(rightItems);
+
+		Set<Item> leftCloned = Item.clone(leftItens);
+		Set<Item> rightCloned = Item.clone(rightItems);
+
+		leftInventory.removeItens(leftItens);
+		rightInventory.removeItens(rightItems);
+
+		rightInventory.addItens(leftCloned);
+		leftInventory.addItens(rightCloned);
+
+		return true;
 	}
-	
-	
+
+	private static Inventory getInventory(Set<Item> itens) {
+		// Considero que todos os itens sãodo mesmo Inventory
+		return itens.iterator().next().getInventory();
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {

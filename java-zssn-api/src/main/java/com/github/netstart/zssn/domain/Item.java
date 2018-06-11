@@ -3,6 +3,7 @@ package com.github.netstart.zssn.domain;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,7 +20,7 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "item")
-public class Item implements Serializable {
+public class Item implements Serializable, Cloneable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -42,14 +43,18 @@ public class Item implements Serializable {
 
 	// jhipster-needle-entity-add-field - JHipster will add fields here, do not
 	// remove
-	public Long getId() {
-		return id;
+
+	public Item() {
 	}
 
 	public Item(String name, Long point, Inventory inventory) {
 		this.name = name;
 		this.point = point;
 		this.inventory = inventory;
+	}
+
+	public Long getId() {
+		return id;
 	}
 
 	public void setId(Long id) {
@@ -135,4 +140,18 @@ public class Item implements Serializable {
 	public String toString() {
 		return "Item{" + "id=" + getId() + ", name='" + getName() + "'" + ", point=" + getPoint() + "}";
 	}
+
+	@Override
+	public Item clone() {
+		Item clone = new Item();
+		clone.setId(id);
+		clone.setPoint(point);
+		clone.setName(name);
+		return clone;
+	}
+
+	public static Set<Item> clone(Set<Item> itens) {
+		return itens.stream().map((Item item) -> item.clone()).collect(Collectors.toSet());
+	}
+
 }
